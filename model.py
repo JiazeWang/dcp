@@ -365,10 +365,14 @@ class Transformer(nn.Module):
     def forward(self, *input):
         src = input[0]
         tgt = input[1]
+        print("src.shape:", src.shape)
+        print("tgt.shape:", tgt.shape)
         src = src.transpose(2, 1).contiguous()
         tgt = tgt.transpose(2, 1).contiguous()
         tgt_embedding = self.model(src, tgt, None, None).transpose(2, 1).contiguous()
         src_embedding = self.model(tgt, src, None, None).transpose(2, 1).contiguous()
+        print("src_embedding.shape:", src.shape)
+        print("tgt_embedding.shape:", tgt.shape)
         return src_embedding, tgt_embedding
 
 
